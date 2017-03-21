@@ -53,7 +53,8 @@ function histograms(array,array1,tarray)
         .attr("x",function(d,i){return i*(histogramw/(array.length));})
         .attr("y",function(d,i){return height1-d.totallifecyclecost/50;})
         .attr("width",function(d){return histogramw/array.length-padding;})
-        .attr("height",function(d,i){return d.totallifecyclecost/50;})
+        .attr("height",function(d,i){if(d.totallifecyclecost<15000){return d.totallifecyclecost/50;}
+                                    else{return d.totallifecyclecost/100;}})
         .attr("fill", function(d,i) {return "rgb("+(i *20)+", " + (i *15) + ", "+(i*10)+")";})
         .attr("stroke",function(d,i){if(d.totallifecyclecost<250){return "gray";}})
         .attr("transform","translate(50,0)")
@@ -141,7 +142,7 @@ d3.select("#bdescription").style("visibility","").selectAll("#bdescription>span"
 d3.select("#bcidsub").text(cid);
 c_arr1.forEach(function(d){
 d3.select("#bdescription").append("span").text("----------------------------").append("br");
-d3.select("#bdescription").append("span").attr("id","investtitle").text("Investment Title: "+d.slice(',')[0]).append("br");
+d3.select("#bdescription").append("span").attr("id","investtitle").text("Project Name: "+d.slice(',')[0]).append("br");
 d3.select("#bdescription").append("span").attr("id","invest_lc").text("Lifecycle Cost: "+d.slice(',')[1]).append("br");
 
 })
