@@ -1,0 +1,151 @@
+#board {
+  position: absolute;
+  top: 20px;
+  left: 305px;
+  width: 500px;
+  text-align: left;
+  color: rgba(240, 116, 132, 1);
+  z-index: -1;
+  font-size: 20px;
+}
+#boardpie {
+  position: absolute;
+  left: 800px;
+  top:450px;
+  width: 500px;
+  text-align: left;
+  color: rgba(240, 116, 132, 1);
+  z-index: -1;
+  font-size: 18px;
+}
+#bcid{
+  color:rgb(245,193,148);
+}
+#lifecost{
+    color:rgb(245,193,148);
+}
+#acname{
+  position: absolute;
+   left: 850px;
+   font-size: 15px;
+ width:500px;
+ color:rgba(240, 116, 132, 1);
+ font-size: 18px;
+}
+
+#bdescription
+{
+  position: absolute;
+  top: 550px;
+  left: 800px;
+  color: rgba(240, 116, 132, 1);
+  font-size: 15px;
+  width: 500px;
+  
+}
+#pie{
+    position: absolute;
+  top: 20px;
+  left: 800px;  
+}
+#bcidsub{
+color:rgb(245,193,148);
+
+}
+.arc path:hover{
+  fill: rgba(178,218,199,0.5);
+}
+#investtitle{
+  color:rgb(245,193,148);
+}
+#invest_lc{
+color:rgb(245,193,148);
+}
+text:hover{
+  font-size:150%;
+  fill:rgba(184, 11, 131, 0.54);
+  
+}
+.histogram{
+  
+}
+rect:hover{
+  fill: rgba(178,218,199,0.5);
+}
+table,tr,td{
+  width:500px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 15px;
+    font-size: 15px;
+font-family: initial;
+}
+td{
+  height:20px;
+}
+
+#name:hover{
+color:rgba(184, 11, 131, 0.54);
+}
+
+#dep_details{
+  margin-left: 100px;
+ 
+}
+#t_description
+{
+  margin-left: 50px;
+  font-size: 16px;
+  margin-bottom: 5px;
+  width:700px;
+}
+#hdesciptionlayer{
+  float: left;
+}
+#tablelayer{
+   width:700px;
+  margin-left:50px;
+}
+
+
+#p_description{
+
+  font-size: 16px;
+  width:700px;
+
+}
+#busi_details{
+  margin-top:5px;
+  margin-left: 50px;
+}
+.tips{
+  width:150px;
+  background-color: #fdf0ef;
+}
+#htips{
+  
+  position:absolute;
+  left:150px;
+}
+#htips_1{
+  position: absolute;
+  left:500px;
+  top:250px;
+}
+#ptips{
+  position:absolute;
+  width:300px;
+  left:800px;
+  top:360px;
+}
+#tbltips{
+  position:absolute;
+  width:300px;
+  top:1500px;
+  left:800px;
+  float: right;
+}
+#p_title{
+  color: rgba(240, 116, 132, 1);
+  font-size: 20px;
+}
