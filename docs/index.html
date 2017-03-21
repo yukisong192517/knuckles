@@ -1,37 +1,112 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <script src="https://d3js.org/d3.v4.min.js"></script> 
-    <script>
-    function draw(data) { 
-        "use strict"; 
-      d3.select("body")
-      .append("ul")
-      .selectAll("li")
-      .data(data)
-      .enter()
-      .append("li")
-        .text(function (d) {
-            return d.name + ": " + d.status;
-        });
-    d3.selectAll("li").style("font-weight",function(d){
-        if(d.status=="GOOD SERVICE")
-        {
-            return "normal";
-        }
-        else{
-            return "bold";
-        }
-    }) 
+<meta charset="utf-8">
+<style> /* set the CSS */
 
- // badass visualization code goes here
-    }
-    </script>
+body { font: 12px Arial;}
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+</style>
+<head>
+   <link rel="stylesheet" type="text/css" href="cw1.css"/>
 </head>
 <body>
-    <script>
-        d3.json("visualisations/data/service_status.json", draw); 
-    </script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script src="//d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+<script src="histogram.js"></script> 
+<div id = "board" style="visibility: hidden;">
+    Agency Name: <br/><span id="agencyname"></span><br/>
+    Total Lifecycle Cost:<br/> <span id="totallifecost"></span><br/>
+</div>
+<div id="acname" style="visibility: hidden;">Agency Name: <br/></div><br/>
+
+<div id="boardpie" style="visibility: hidden;">
+    
+    Business Case Id: <br/><span id="bcid"></span><br/>
+    Total Lifecycle Cost:<br/> <span id="lifecost"></span><br/>
+</div>
+<div id="bdescription" style="visibility: hidden;">
+    Current Chosen Business Case Name: <br/> <div id="bcidsub"></div><br/>
+</div>
+<div class="tips" id="htips">
+Click bars or Click Department Name to see the details in chosen department.</br>
+</div>
+<div class="tips" id="htips_1">
+Bars are too short?<br/>Clicking the Department Name also shows details in chosen department.
+</div>
+<div class="tips" id="ptips">
+Slide to see Business Case and Total Lifecycle Cost in this Business Case.<br/>
+Click the sector to see details in each Business Case.
+</div>
+<div class="tips" id="tbltips">
+Click the Business Case Name to see Investment Title and Lifecycle Cost in this Business Case.<br/>
+
+</div>
+<script>
+
+var agencycode=[];
+function piec(dataarray,department)
+    {
+    var pie_array=[];
+    var dcost={};
+    
+    var pe_chart=dataarray.reduce(function(dcost,row){
+        var busin_case=row["Investment Title"];
+        var lifec=row["Lifecycle Cost"];
+    if(row["Agency Name"]==department)
+    {
+          if(!dcost[busin_case])
+        {
+            dcost[busin_case]= +lifec;
+        }
+        else{
+            dcost[busin_case]+= +(lifec);
+        }
+    }
+         return dcost;
+    },{});
+   
+    return pe_chart;
+}
+
+ 
+
+   var dataset= d3.csv("1.csv",function(d){
+   var totallifecost= d.reduce(function(lfcost,value){
+        var acname1=value["Agency Name"];
+        if(!lfcost[acname1])
+        {
+            lfcost[acname1]=+(value["Lifecycle Cost"]);
+         }
+        else{
+            var lifecost=+(value["Lifecycle Cost"]);
+            lfcost[acname1]+=lifecost;
+        }
+        return lfcost;
+    
+    },{})
+    //transfer object to array
+    var piechartarray=[];
+   var tlifecost_arr=Object.keys(totallifecost).map(function(value)
+   {
+        piechartarray.push(piec(d,value));
+        return {agencyname:value,
+                totallifecyclecost: totallifecost[value]};
+    });
+   
+       
+   
+    histograms(tlifecost_arr,piechartarray,d);
+    
+ 
+})
+ 
+
+
+</script>
 </body>
-</html>
