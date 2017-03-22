@@ -125,7 +125,8 @@ color:rgba(184, 11, 131, 0.54);
 #htips{
   
   position:absolute;
-  left:150px;
+  left:300px;
+  top:150px;
 }
 #htips_1{
   position: absolute;

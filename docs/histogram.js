@@ -3,7 +3,7 @@ function histograms(array,array1,tarray)
     var margin ={top: 0, right: 20, bottom: 20, left: 0},
       width = 800,
       height = 700;
-    var height1=400;
+    var height1=500;
     //default canvas of histogram
     
    
@@ -25,7 +25,7 @@ function histograms(array,array1,tarray)
     var xAxis=d3.axisBottom(x1).ticks(array.length).tickFormat(function(d,i){if(i!=array.length){return array[i].agencyname;}
                                                                                 else{return ""}});
     var xAxisgroup = canvas.append("g")
-                            .attr("transform","translate(50,400)")
+                            .attr("transform","translate(50,500)")
                             .call(xAxis);
 
     var bars= canvas.selectAll(".bars")
@@ -51,9 +51,11 @@ function histograms(array,array1,tarray)
     bars.append("rect")
         .attr("id",function(d,i){return i;})
         .attr("x",function(d,i){return i*(histogramw/(array.length));})
-        .attr("y",function(d,i){return height1-d.totallifecyclecost/50;})
+        .attr("y",function(d,i){if(d.totallifecyclecost<14000){return height1-d.totallifecyclecost/50;}
+                                    else{return height1-d.totallifecyclecost/100;}
+            })
         .attr("width",function(d){return histogramw/array.length-padding;})
-        .attr("height",function(d,i){if(d.totallifecyclecost<15000){return d.totallifecyclecost/50;}
+        .attr("height",function(d,i){if(d.totallifecyclecost<14000){return d.totallifecyclecost/50;}
                                     else{return d.totallifecyclecost/100;}})
         .attr("fill", function(d,i) {return "rgb("+(i *20)+", " + (i *15) + ", "+(i*10)+")";})
         .attr("stroke",function(d,i){if(d.totallifecyclecost<250){return "gray";}})
