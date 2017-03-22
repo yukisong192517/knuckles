@@ -1,7 +1,7 @@
 #board {
   position: absolute;
-  top: 20px;
-  left: 305px;
+  top: 500px;
+  left: 400px;
   width: 500px;
   text-align: left;
   color: rgba(240, 116, 132, 1);
@@ -11,7 +11,7 @@
 #boardpie {
   position: absolute;
   left: 800px;
-  top:450px;
+  top:900px;
   width: 500px;
   text-align: left;
   color: rgba(240, 116, 132, 1);
@@ -36,7 +36,7 @@
 #bdescription
 {
   position: absolute;
-  top: 550px;
+  top: 1050px;
   left: 800px;
   color: rgba(240, 116, 132, 1);
   font-size: 15px;
@@ -45,7 +45,7 @@
 }
 #pie{
     position: absolute;
-  top: 20px;
+    top: 550px;
   left: 800px;  
 }
 #bcidsub{
@@ -66,9 +66,7 @@ text:hover{
   fill:rgba(184, 11, 131, 0.54);
   
 }
-.histogram{
-  
-}
+
 rect:hover{
   fill: rgba(178,218,199,0.5);
 }
@@ -125,28 +123,33 @@ color:rgba(184, 11, 131, 0.54);
 #htips{
   
   position:absolute;
-  left:300px;
-  top:150px;
+   left:400px;
+  top:650px;
 }
 #htips_1{
   position: absolute;
-  left:500px;
-  top:250px;
+  left:600px;
+  top:800px;
 }
 #ptips{
   position:absolute;
   width:300px;
   left:800px;
-  top:360px;
+  top:850px;
 }
-#tbltips{
-  position:absolute;
-  width:300px;
-  top:1500px;
-  left:800px;
-  float: right;
-}
+
 #p_title{
   color: rgba(240, 116, 132, 1);
   font-size: 20px;
+}
+div{
+  width:800px;
+
+}
+#description{
+  margin-left:100px;
+  font-size:14px;
+}
+#h_header{
+  margin-left:50px;
 }

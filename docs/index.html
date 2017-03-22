@@ -22,10 +22,31 @@ body { font: 12px Arial;}
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 <script src="//d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
 <script src="histogram.js"></script> 
+<div id = "description"  >
+<h2>Summary</h2>
+<div> This visualisation is for those people who want to know what is the lifecycle in the US government.  <br/>
+    Maybe they want to compare different department or different business case, and decide to increase or decrease their investment or validate the project performance in its lifecycle. </div>
+<h2>Histogram</h2>
+<div>
+    <ul>
+        <li>histogram is comparing total lifecycle cost of different department in the US government. The height is the number of total lifecycle cost on this department. Different bars are different departments. <br/></li>
+        <li>Slide the mouse to different bars could see different department names and lifecycle cost on the right corner of graph. For those short bars (or all bars), slide to the name could also see names and cost.<br/></li>
+        <li>While clicking on certain department (clicking names or bars), a pie chart will be shown on the right-hand side. The title is what is chosen now. Also, a new table of the lifecycle cost distribution in current chosen department is created below the first table. This chart is for those people who want to know the details of the department and know more about the lifecycle cost. </li>
+    </ul> 
+</div>
+<h2>Pie chart</h2>
+<div>
+    <ul>
+        <li>Pie chart shows that how much total lifecycle cost of each business case occupied in certain department. The whole circle is the total lifecycle cost in a department. Different business cases (Investment titles) are different sectors with different colours. The area of each sector represents the total lifecycle cost of this investment title.</li><br/>
+        <li>Slide to different sector to see the business case Id (Investment title) and the total lifecycle cost of certain business case Id.</li><br/>
+        <li>Click the sector to see the details inside a business case and lifecycle cost of them. These details are to claim how many projects are included and for each project what is the lifecycle cost.</li></div>
+    </ul> 
+</div>
 <div id = "board" style="visibility: hidden;">
     Agency Name: <br/><span id="agencyname"></span><br/>
     Total Lifecycle Cost:<br/> <span id="totallifecost"></span><br/>
 </div>
+
 <div id="acname" style="visibility: hidden;">Agency Name: <br/></div><br/>
 
 <div id="boardpie" style="visibility: hidden;">
@@ -46,10 +67,7 @@ Bars are too short?<br/>Clicking the Department Name also shows details in chose
 Slide to see Business Case and Total Lifecycle Cost in this Business Case.<br/>
 Click the sector to see details in each Business Case.
 </div>
-<div class="tips" id="tbltips">
-Click the Business Case Name to see Investment Title and Lifecycle Cost in this Business Case.<br/>
 
-</div>
 <script>
 
 var agencycode=[];

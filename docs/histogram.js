@@ -2,7 +2,7 @@ function histograms(array,array1,tarray)
 {
     var margin ={top: 0, right: 20, bottom: 20, left: 0},
       width = 800,
-      height = 700;
+      height = 800;
     var height1=500;
     //default canvas of histogram
     
@@ -10,7 +10,7 @@ function histograms(array,array1,tarray)
     var canvas = d3.select("body").append("svg")
                 .attr("width",width)
                 .attr("height",height)
-                .attr("transform","translate(100,100)")
+                .attr("transform","translate(150,100)")
                 .attr("class","histogram");
     var xaxisscale = d3.scaleLinear()
                         .domain([0,100])
@@ -52,11 +52,11 @@ function histograms(array,array1,tarray)
         .attr("id",function(d,i){return i;})
         .attr("x",function(d,i){return i*(histogramw/(array.length));})
         .attr("y",function(d,i){if(d.totallifecyclecost<14000){return height1-d.totallifecyclecost/50;}
-                                    else{return height1-d.totallifecyclecost/100;}
+                                    else{if(d.totallifecyclecost/100<500){return height1-d.totallifecyclecost/100;}else{return height1-500;}}
             })
         .attr("width",function(d){return histogramw/array.length-padding;})
         .attr("height",function(d,i){if(d.totallifecyclecost<14000){return d.totallifecyclecost/50;}
-                                    else{return d.totallifecyclecost/100;}})
+                                    else{if(d.totallifecyclecost/100<500){return d.totallifecyclecost/100;}else{return 500;}}})
         .attr("fill", function(d,i) {return "rgb("+(i *20)+", " + (i *15) + ", "+(i*10)+")";})
         .attr("stroke",function(d,i){if(d.totallifecyclecost<250){return "gray";}})
         .attr("transform","translate(50,0)")
@@ -80,19 +80,28 @@ function histograms(array,array1,tarray)
     //table of department
   var dlayer=d3.select("body").append("div").attr("id","desciptionlayer");
   var hdes=dlayer.append("div").attr("id","hdesciptionlayer");
+  hdes.append("h2").attr("id","h_header").text("  Table 1: Department and Its Lifecycle Cost");  
   hdes.append("div").attr("id","t_description")
-    .text("The table below will show all department of US government and their total lifecycle cost of each department. Click the Agency Name to see details in chosen department.")
+    .text("The table is a literature version of the histogram. Clicking the Agency name could also activate the pie chart and table 2")
     .attr("width","500px;");
     var dp_details=hdes.append("table").attr("id","dep_details");
      var firstrows=dp_details.append("tr");
     firstrows.append("td").text("Agency Name");
     firstrows.append("td").text("Total Life Cycle Cost");
-    array.forEach(function(d){
+    //sort array
+    var dataset1=array.map(function(d){
+        return [d.agencyname,d.totallifecyclecost];
+    }).sort(function(a,b){return a[1]-b[1];});
+    dataset=dataset1.map(function(d){
+        return {agencyname:d[0],totallifecyclecost:d[1]}
+    });
+    
+    dataset.forEach(function(d){
         var rows=dp_details.append("tr");
         rows.append("td").attr("id","name").text(d.agencyname).on("click",function(e){
                     d3.select("#acname").style("visibility", "").text(d.agencyname);             
                     show(d);
-                    var temptopie= trans(array1[array.indexOf(d)]);
+                    var temptopie= trans(array1[array.findIndex(function(e){return e.agencyname==d.agencyname})]);
                     d3.select("#tablelayer").remove();
                     piechart(temptopie,tarray);
                     pietable(temptopie,tarray);
@@ -199,13 +208,21 @@ function pietable(dataset,tarray)
 {
     var tablelayer=d3.select("#desciptionlayer").append("div").attr("id","tablelayer");
     tablelayer.append("div").attr("id","p_title");
+    tablelayer.append("h2").attr("id","p_header").text("Table 2: Investment Title and Lifecycle Cost in A Department");
     tablelayer.append("div").attr("id","p_description")
-    .text("The table below show all business case of chosen department and their lifecycle cost of each business case. Click the Business Name to see details in chosen Business case.")
+    .text("The table below show all business cases of chosen department and their lifecycle cost of each business case. Click the Business Name to see details of chosen Business case below the pie chart.")
     .attr("width","300px;"); 
     var busi_details=tablelayer.append("table").attr("id","busi_details");
      var firstrows=busi_details.append("tr");
     firstrows.append("td").text("Business Case Name");
     firstrows.append("td").text("Total Life Cycle Cost");
+    //sort array
+    var dataset1=dataset.map(function(d){
+        return [d.business_id,d.totalbusinesslifecyclecost];
+    }).sort(function(a,b){return a[1]-b[1];});
+    dataset=dataset1.map(function(d){
+        return {business_id:d[0],totalbusinesslifecyclecost:d[1]}
+    });
 
   dataset.forEach(function(d){
         var rows=busi_details.append("tr");
